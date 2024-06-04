@@ -1,0 +1,137 @@
+
+
+//23F Assignment 3 Solution: CourseList.java 
+ 
+// Insert your solution code into this file as instructed in the information document. Hints have been provided.
+// Insert your javadoc style comments to clearly and thoroughly explain your work.
+// Ensure that you use the appropriate methods for the operations specifically mentioned in the instructions.
+// Note that there are code inbetween the print statements (see assignment information).
+
+
+//This assignment explores the use of Lists, LinkedLists, ListIterators and several more concepts learned in this course.
+//The program creates two LinkedLists of Strings. 
+//In order to make the code more concise, this program uses the appropriate methods and the LinkedList constructor that takes a Collection argument. 
+//The elements in one list are added to the other list through a method (ensure that you use the method taught in class for this). Then the resource is released.
+//Thereafter, all the Strings are converted to uppercase. 
+//Subsequently, several of the courses were found unsuitable and needed to be deleted from the list. Finally, duplicates were also removed. 
+
+//Make sure that you have detailed JAVADOC in your code using the appropriate JAVADOC style used in this course.
+
+
+
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Collections;
+import java.util.Collection;
+import java.util.Set;
+import java.util.HashSet; 
+
+public class CourseList {
+
+    public static void main(String[] args) {
+    	
+    	System.out.println("Welcome Everyone to My Assignment 3. My name is Vanshaj Chuttani\n");
+        // add courses to list1
+        String[] courses = {"math", "english", "chemistry", "physics", "history", "geography"};
+        LinkedList<String> list1 = new LinkedList<>(Arrays.asList(courses));
+
+        // add courses2 to list2
+        String[] courses2 = {"religion", "arts", "accounting", "math", "programming", "biology"};
+        LinkedList<String> list2 = new LinkedList<>(Arrays.asList(courses2));
+
+        // add elements of list2 to list1
+        list1.addAll(list2);
+
+        // print the updated content of list1 and release resources of list2
+        printList(list1);
+        
+        // convert all elements in list1 to uppercase
+        convertToUpperCase(list1);
+        printList(list1);
+
+        // create a sublist of items 4 to 6 from list1, delete the sublist, and print the updated output
+        deleteSublist(list1, 3, 6);
+        printList(list1);
+
+        // print the list in reverse order
+        printListInReverse(list1);
+
+        // sort the list alphabetically and print it
+        sortList(list1);
+        printList(list1);
+
+        // eliminate all duplicated elements and print the final content of the list
+        eliminateDuplicates(list1);
+        printList(list1);
+    }
+
+    /**
+     * Print the content of the list.
+     * @param list The list to be printed.
+     */
+    private static void printList(List<String> list) {
+        System.out.println("The List is:");
+        for (String course : list) {
+            System.out.print(course + ", ");
+        }
+        System.out.println("\n");
+    }
+
+    /**
+     * Convert all elements in the list to uppercase.
+     * @param list The list to be modified.
+     */
+    private static void convertToUpperCase(List<String> list) {
+        ListIterator<String> iterator = list.listIterator();
+        while (iterator.hasNext()) {
+            String course = iterator.next();
+            iterator.set(course.toUpperCase());
+        }
+    }
+
+    /**
+     * Create a sublist of items from start to end and delete the sublist from the list.
+     * @param list The list to be modified.
+     * @param start The start index of the sublist.
+     * @param end The end index of the sublist.
+     */
+    private static void deleteSublist(List<String> list, int start, int end) {
+        List<String> sublist = list.subList(start, end);
+        sublist.clear();
+    }
+
+    /**
+     * Print the list in reverse order.
+     * @param list The list to be printed in reverse order.
+     */
+    private static void printListInReverse(List<String> list) {
+        ListIterator<String> iterator = list.listIterator(list.size());
+        System.out.println("Reversed List:");
+        while (iterator.hasPrevious()) {
+            System.out.print(iterator.previous() + ", ");
+        }
+        System.out.println("\n");
+    }
+
+    /**
+     * Sort the list alphabetically.
+     * @param list The list to be sorted.
+     */
+    private static void sortList(List<String> list) {
+        Collections.sort(list);
+    }
+
+    /**
+     * Eliminate all duplicated elements from the list.
+     * @param list The list from which duplicates should be eliminated.
+     */
+    private static void eliminateDuplicates(List<String> list) {
+        Set<String> uniqueSet = new HashSet<>(list);
+        list.clear();
+        list.addAll(uniqueSet);
+    }
+}
+
+
